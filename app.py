@@ -5,6 +5,14 @@ from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
+from utils.retrieval import (
+    COLLECTION_NAME,
+    EMBEDDING_MODEL,
+    RETRIEVAL_FETCH_K,
+    RETRIEVAL_K,
+    RETRIEVAL_LAMBDA_MULT,
+)
+
 DB_PATH = "chroma_db"
 
 st.set_page_config(page_title="Local RAG Chatbot")
@@ -17,10 +25,11 @@ st.write("Chat with your notes and PDFs")
 def load_vectorstore():
 
     embeddings = OllamaEmbeddings(
-        model="nomic-embed-text"
+        model=EMBEDDING_MODEL
     )
 
     vectordb = Chroma(
+        collection_name=COLLECTION_NAME,
         persist_directory=DB_PATH,
         embedding_function=embeddings
     )
@@ -31,7 +40,12 @@ def load_vectorstore():
 vectordb = load_vectorstore()
 
 retriever = vectordb.as_retriever(
-    search_kwargs={"k": 1}
+    search_type="mmr",
+    search_kwargs={
+        "k": RETRIEVAL_K,
+        "fetch_k": RETRIEVAL_FETCH_K,
+        "lambda_mult": RETRIEVAL_LAMBDA_MULT,
+    },
 )
 
 llm = ChatOllama(
@@ -42,7 +56,7 @@ llm = ChatOllama(
 
 prompt = ChatPromptTemplate.from_template(
     """
-Answer the question using ONLY the context below.
+Answer the question using the below as context.
 
 Context:
 {context}

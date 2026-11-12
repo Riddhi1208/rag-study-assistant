@@ -1,0 +1,62 @@
+{
+  "documents": [
+    {
+      "source": "atlas-sync",
+      "text": "Atlas Sync Service Operations Handbook\n\nThe service accepts uploads over encrypted HTTPS. Operators should check the status dashboard before investigating delayed transfers. Scheduled maintenance is announced one week in advance.\n\nOffline synchronization retries with exponential backoff and resumes within 15 minutes after a device reconnects. A user can pause a transfer from the desktop client without losing completed work.\n\nEncrypted exports are retained for 30 days, then deleted automatically. Administrators can request an earlier deletion from the privacy console. The audit log records export creation and deletion events."
+    },
+    {
+      "source": "meridian-api",
+      "text": "Meridian API Security Guide\n\nEvery API request must include a valid bearer token. Clients should keep credentials out of application logs and use the sandbox endpoint for integration testing.\n\nAccess tokens expire after 20 minutes. A client can request a replacement token using its refresh credential; refresh credentials must be stored in a protected secret store.\n\nSigning keys rotate every 90 days. The security team publishes the next key identifier at least seven days before rotation, and the previous key remains valid for a 24-hour overlap."
+    },
+    {
+      "source": "cypress-response",
+      "text": "Cypress Incident Response Handbook\n\nThe on-call engineer records the incident start time, affected services, and initial symptoms in the response channel. Status updates should be concise and include the next update time.\n\nFor a priority-one incident, the on-call engineer must acknowledge the alert within 10 minutes. If there is no acknowledgement, the system pages the secondary responder.\n\nThe recovery objective for the primary database is four hours. After service is restored, the incident lead schedules a review within five business days and assigns owners to follow-up actions."
+    },
+    {
+      "source": "summit-device",
+      "text": "Summit Field Device Maintenance Notes\n\nStore devices in a dry case when they are not in use. Before a field trip, inspect the connector and confirm that the latest device firmware is installed.\n\nThe Summit sensor requires calibration every six months. Record the calibration date in the equipment register and attach the calibration certificate to the device record.\n\nA fully charged Summit battery supports up to 72 hours of normal operation. Cold-weather use can reduce runtime, so teams working below freezing should carry a spare battery."
+    }
+  ],
+  "questions": [
+    {
+      "id": "atlas-offline-resume",
+      "question": "How soon does Atlas synchronization resume after a device reconnects?",
+      "evidence": "resumes within 15 minutes"
+    },
+    {
+      "id": "atlas-export-retention",
+      "question": "How long are encrypted Atlas exports retained?",
+      "evidence": "retained for 30 days"
+    },
+    {
+      "id": "meridian-token-lifetime",
+      "question": "When does a Meridian API access token expire?",
+      "evidence": "expire after 20 minutes"
+    },
+    {
+      "id": "meridian-key-rotation",
+      "question": "How often are Meridian signing keys rotated?",
+      "evidence": "rotate every 90 days"
+    },
+    {
+      "id": "cypress-acknowledgement",
+      "question": "What is the acknowledgement deadline for a Cypress priority-one alert?",
+      "evidence": "acknowledge the alert within 10 minutes"
+    },
+    {
+      "id": "cypress-recovery-objective",
+      "question": "What recovery objective applies to the Cypress primary database?",
+      "evidence": "recovery objective for the primary database is four hours"
+    },
+    {
+      "id": "summit-calibration",
+      "question": "How frequently does the Summit sensor need calibration?",
+      "evidence": "calibration every six months"
+    },
+    {
+      "id": "summit-battery-runtime",
+      "question": "How long can a fully charged Summit battery operate normally?",
+      "evidence": "supports up to 72 hours of normal operation"
+    }
+  ]
+}
