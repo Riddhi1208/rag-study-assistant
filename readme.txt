@@ -7,64 +7,80 @@ on your machine.
 
 ## Setup and run
 
-Install Python 3.10+, Ollama, and the required models:
+### Prerequisites
 
-bash
+- Python 3.10+
+- [Ollama](https://ollama.com/)
+- The embedding and chat models:
+
+```bash
 ollama pull nomic-embed-text
 ollama pull phi3
+```
+
+### Install dependencies
+
+Create and activate a virtual environment:
+
+```powershell
 python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
 
+On macOS or Linux, activate it with:
 
-Activate the virtual environment (`.venv\Scripts\Activate.ps1` in Windows
-PowerShell, or `source .venv/bin/activate` on macOS/Linux), then install
-dependencies:
+```bash
+source .venv/bin/activate
+```
 
-bash
+Then install the dependencies:
+
+```bash
 pip install -r requirements.txt
+```
 
+### Choose study materials
 
-The app initially uses the persistent folder index. To use different materials,
-upload PDFs directly in the app:
+The app initially uses the persistent folder index. To build or refresh it, put
+PDFs in the `data/` folder and run:
 
-Alternatively, put PDFs in a `data/` folder and build the folder index:
-
-bash
+```bash
 python ingest.py
+```
 
+You can also upload PDFs directly in the app. Uploaded PDFs become the active
+sources for the current app session and do not overwrite the folder index.
+Scanned PDFs need OCR before they can be indexed.
 
-Ingestion replaces the active Chroma collection with the latest document
-chunks. Uploaded PDFs are indexed in memory for your current app session and
-don't overwrite the folder index. Scanned PDFs need OCR before upload. Start
-the study assistant with:
+### Start the app
 
-bash
+```bash
 streamlit run app.py
-
+```
 
 ## Evaluate retrieval
 
 Run the labeled benchmark from the project root:
 
-bash
+```bash
 python -m evaluation.evaluate_retrieval
+```
 
-
-The pipeline loads 50 questions with expected evidence phrases and a small,
-synthetic document corpus from `evaluation/questions.json`. It splits and
-embeds the same documents twice, then retrieves the top three chunks per
-question:
+The benchmark uses 50 questions and a small synthetic document corpus from
+`evaluation/questions.json`. It retrieves the top three chunks per question and
+compares:
 
 | Variant | Chunking | Chunks | Ranking |
-|---|---|---|---|
+| --- | --- | ---: | --- |
 | 19 chunks | 500 characters, 50 overlap | 19 | MMR |
 | 35 chunks | 230 characters, 50 overlap | 35 | MMR |
 
-It reports **Hit@1**, **Hit@3**, and **MRR@3** for each variant.
-A hit means a retrieved chunk contains that question's expected evidence
-phrase; MRR rewards finding the evidence nearer the top. This measures retrieval
-only—not generated-answer accuracy or faithfulness. The benchmark uses local
-Ollama embeddings (`nomic-embed-text`) and does not call the answer model.
-Results are specific to this small synthetic set, not a general quality claim.
+It reports **Hit@1**, **Hit@3**, and **MRR@3**. A hit means a retrieved chunk
+contains the question's expected evidence phrase; MRR rewards finding the
+evidence nearer the top. This measures retrieval only—not generated-answer
+accuracy or faithfulness. The benchmark uses local Ollama embeddings
+(`nomic-embed-text`) and does not call the answer model. Results are specific to
+this small synthetic set, not a general quality claim.
 
 ## Practice quiz
 
@@ -74,11 +90,13 @@ general review from up to 10 relevant chunks. Answer one question at a time to
 get immediate feedback and review the retrieved passages. At the end, the app
 shows your score and explanations for questions to revisit.
 
-Run the quiz, metric, and dataset checks with:
+Run the quiz, metric, uploaded-document, and dataset tests with:
 
-bash
+```bash
 python -m unittest evaluation.test_uploaded_documents evaluation.test_quiz evaluation.test_metrics evaluation.test_dataset
+```
 
+## Configuration
 
 Tune chunk size, overlap, and MMR settings in `utils/retrieval.py`. Re-run
 `python ingest.py` after changing the indexing chunk settings.
