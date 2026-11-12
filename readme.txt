@@ -23,14 +23,19 @@ bash
 pip install -r requirements.txt
 
 
-Put PDFs in a `data/` folder and build the local index:
+The app initially uses the persistent folder index. To use different materials,
+upload PDFs directly in the app:
+
+Alternatively, put PDFs in a `data/` folder and build the folder index:
 
 bash
 python ingest.py
 
 
 Ingestion replaces the active Chroma collection with the latest document
-chunks. Start the study assistant with:
+chunks. Uploaded PDFs are indexed in memory for your current app session and
+don't overwrite the folder index. Scanned PDFs need OCR before upload. Start
+the study assistant with:
 
 bash
 streamlit run app.py
@@ -61,10 +66,18 @@ only—not generated-answer accuracy or faithfulness. The benchmark uses local
 Ollama embeddings (`nomic-embed-text`) and does not call the answer model.
 Results are specific to this small synthetic set, not a general quality claim.
 
-Run the metric and dataset checks with:
+## Practice quiz
+
+Open **Practice quiz** in the app to create a 10-question multiple-choice quiz.
+Optionally enter a topic to focus retrieval; otherwise, the app creates a
+general review from up to 10 relevant chunks. Answer one question at a time to
+get immediate feedback and review the retrieved passages. At the end, the app
+shows your score and explanations for questions to revisit.
+
+Run the quiz, metric, and dataset checks with:
 
 bash
-python -m unittest evaluation.test_metrics evaluation.test_dataset
+python -m unittest evaluation.test_uploaded_documents evaluation.test_quiz evaluation.test_metrics evaluation.test_dataset
 
 
 Tune chunk size, overlap, and MMR settings in `utils/retrieval.py`. Re-run

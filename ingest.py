@@ -1,9 +1,14 @@
+from collections.abc import Sequence
+from io import BytesIO
 import os
 
 from langchain_community.document_loaders import PyPDFLoader
+from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
+from pypdf import PdfReader
+from pypdf.errors import PdfReadError
 
 from utils.retrieval import (
     CHUNK_OVERLAP,
@@ -31,6 +36,39 @@ def load_documents():
             documents.extend(loader.load())
 
     return documents
+
+
+def load_uploaded_documents(
+    uploaded_files: Sequence[tuple[str, bytes]],
+) -> tuple[list[Document], list[str]]:
+    documents = []
+    files_without_text = []
+
+    for filename, file_bytes in uploaded_files:
+        try:
+            reader = PdfReader(BytesIO(file_bytes))
+        except PdfReadError as error:
+            raise ValueError(f"Could not read uploaded PDF '{filename}'") from error
+
+        if reader.is_encrypted:
+            raise ValueError(f"Password-protected PDF '{filename}' is not supported")
+
+        pages_with_text = 0
+        for page_number, page in enumerate(reader.pages):
+            page_text = page.extract_text()
+            if page_text and page_text.strip():
+                documents.append(
+                    Document(
+                        page_content=page_text,
+                        metadata={"source": filename, "page": page_number},
+                    )
+                )
+                pages_with_text += 1
+
+        if not pages_with_text:
+            files_without_text.append(filename)
+
+    return documents, files_without_text
 
 
 def split_documents(
