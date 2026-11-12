@@ -1,3 +1,4 @@
+
 {
   "documents": [
     {
@@ -15,6 +16,26 @@
     {
       "source": "summit-device",
       "text": "Summit Field Device Maintenance Notes\n\nStore devices in a dry case when they are not in use. Before a field trip, inspect the connector and confirm that the latest device firmware is installed.\n\nThe Summit sensor requires calibration every six months. Record the calibration date in the equipment register and attach the calibration certificate to the device record.\n\nA fully charged Summit battery supports up to 72 hours of normal operation. Cold-weather use can reduce runtime, so teams working below freezing should carry a spare battery."
+    },
+    {
+      "source": "biology-cell-structure",
+      "text": "Biology Study Notes: Cell Structure and Function\n\nThe cell is the basic structural and functional unit of life. All living organisms are made of one or more cells.\n\nThe cell membrane controls the movement of substances into and out of the cell. The cytoplasm is the jelly-like substance where many cellular reactions take place.\n\nThe nucleus contains genetic material called DNA and controls many activities of the cell. Mitochondria release energy through cellular respiration and are often called the powerhouse of the cell.\n\nRibosomes are responsible for protein synthesis. In plant cells, chloroplasts contain chlorophyll and carry out photosynthesis. The cell wall provides structural support and protection."
+    },
+    {
+      "source": "physics-newtons-laws",
+      "text": "Physics Study Notes: Newton's Laws of Motion\n\nNewton's First Law states that an object remains at rest or continues moving at constant velocity unless acted upon by a net external force. This property is called inertia.\n\nNewton's Second Law states that the net force acting on an object equals its mass multiplied by its acceleration. The formula is F = ma, where force is measured in newtons, mass in kilograms, and acceleration in metres per second squared.\n\nNewton's Third Law states that for every action force, there is an equal and opposite reaction force. Action and reaction forces act on different objects.\n\nFriction is a force that opposes relative motion between surfaces in contact. Gravity is an attractive force between objects that have mass."
+    },
+    {
+      "source": "mathematics-algebra",
+      "text": "Mathematics Study Notes: Basic Algebra\n\nAlgebra uses symbols and letters to represent unknown or changing quantities. A variable is a letter or symbol that represents a value, such as x or y.\n\nAn algebraic expression contains numbers, variables, and mathematical operations. An equation states that two expressions are equal.\n\nTo solve a linear equation, perform the same operation on both sides while isolating the variable. For example, if 2x + 4 = 10, subtract 4 from both sides to obtain 2x = 6, then divide both sides by 2 to obtain x = 3.\n\nThe distributive property states that a(b + c) = ab + ac. Like terms have the same variables raised to the same powers and can be combined by adding or subtracting their coefficients."
+    },
+    {
+      "source": "computer-science-networks",
+      "text": "Computer Science Study Notes: Computer Networks and the Internet\n\nA computer network is a group of connected devices that communicate and share resources. The Internet is a global network of interconnected computer networks.\n\nAn IP address identifies a device on an IP network. The Domain Name System, or DNS, translates human-readable domain names into IP addresses.\n\nHTTP is a protocol used to transfer web resources between clients and servers. HTTPS is the secure version of HTTP and uses Transport Layer Security (TLS) to protect communication through encryption and authentication.\n\nA router forwards data packets between different networks. A switch connects devices within a local area network and forwards frames based on MAC addresses.\n\nBandwidth refers to the maximum data transfer capacity of a network connection, while latency refers to the time taken for data to travel from one point to another."
+    },
+    {
+      "source": "chemistry-atomic-structure",
+      "text": "Chemistry Study Notes: Atomic Structure and the Periodic Table\n\nAn atom is the basic unit of an element that retains the chemical properties of that element. Atoms contain protons, neutrons, and electrons.\n\nProtons have a positive electrical charge and are found in the nucleus. Neutrons have no electrical charge and are also found in the nucleus. Electrons have a negative electrical charge and occupy regions around the nucleus.\n\nThe atomic number of an element equals the number of protons in its nucleus. The mass number equals the total number of protons and neutrons.\n\nThe periodic table arranges elements in order of increasing atomic number. Elements in the same group often have similar chemical properties because they have similar outer electron configurations.\n\nAn ion is an atom or group of atoms that has gained or lost electrons and therefore has an electrical charge."
     }
   ],
   "questions": [
@@ -57,6 +78,220 @@
       "id": "summit-battery-runtime",
       "question": "How long can a fully charged Summit battery operate normally?",
       "evidence": "supports up to 72 hours of normal operation"
+    },
+    {
+      "id": "biology-cell-unit",
+      "question": "What is the basic structural and functional unit of life?",
+      "evidence": "basic structural and functional unit of life"
+    },
+    {
+      "id": "biology-nucleus",
+      "question": "What is the function of the nucleus in a cell?",
+      "evidence": "contains genetic material called DNA"
+    },
+    {
+      "id": "biology-mitochondria",
+      "question": "What do mitochondria do?",
+      "evidence": "release energy through cellular respiration"
+    },
+    {
+      "id": "biology-chloroplasts",
+      "question": "Which organelle carries out photosynthesis in plant cells?",
+      "evidence": "chloroplasts contain chlorophyll and carry out photosynthesis"
+    },
+    {
+      "id": "physics-first-law",
+      "question": "What does Newton's First Law of Motion state?",
+      "evidence": "remains at rest or continues moving at constant velocity"
+    },
+    {
+      "id": "physics-second-law",
+      "question": "What is the mathematical formula for Newton's Second Law?",
+      "evidence": "F = ma"
+    },
+    {
+      "id": "physics-third-law",
+      "question": "What does Newton's Third Law state about action and reaction?",
+      "evidence": "equal and opposite reaction force"
+    },
+    {
+      "id": "math-variable",
+      "question": "What is a variable in algebra?",
+      "evidence": "represents a value, such as x or y"
+    },
+    {
+      "id": "math-linear-equation",
+      "question": "What is the solution to the equation 2x + 4 = 10?",
+      "evidence": "obtain x = 3"
+    },
+    {
+      "id": "math-distributive-property",
+      "question": "What is the distributive property in algebra?",
+      "evidence": "a(b + c) = ab + ac"
+    },
+    {
+      "id": "network-dns",
+      "question": "What does DNS do in a computer network?",
+      "evidence": "translates human-readable domain names into IP addresses"
+    },
+    {
+      "id": "network-https",
+      "question": "How does HTTPS protect communication?",
+      "evidence": "uses Transport Layer Security (TLS)"
+    },
+    {
+      "id": "network-latency",
+      "question": "What does latency mean in computer networking?",
+      "evidence": "time taken for data to travel from one point to another"
+    },
+    {
+      "id": "chemistry-atomic-number",
+      "question": "What determines the atomic number of an element?",
+      "evidence": "equals the number of protons"
+    },
+    {
+      "id": "chemistry-mass-number",
+      "question": "How is the mass number of an atom calculated?",
+      "evidence": "total number of protons and neutrons"
+    },
+
+
+    {
+      "id": "biology-cell-membrane-inference",
+      "question": "A cell is placed in an environment where its membrane can no longer regulate substance movement. Which important cellular function is directly affected?",
+      "evidence": "controls the movement of substances into and out of the cell"
+    },
+    {
+      "id": "biology-organelle-energy",
+      "question": "If a cell cannot release energy through cellular respiration effectively, which organelle is most likely malfunctioning?",
+      "evidence": "Mitochondria release energy through cellular respiration"
+    },
+    {
+      "id": "biology-plant-animal-comparison",
+      "question": "Which two structures mentioned in the notes are specifically associated with plant cells and what are their functions?",
+      "evidence": "chloroplasts contain chlorophyll and carry out photosynthesis"
+    },
+    {
+      "id": "biology-protein-synthesis",
+      "question": "A cell can produce DNA but cannot manufacture proteins properly. Which cellular structure should be investigated?",
+      "evidence": "Ribosomes are responsible for protein synthesis"
+    },
+    {
+      "id": "physics-inertia-application",
+      "question": "A passenger moves forward when a moving bus suddenly stops. Which Newtonian concept explains this observation?",
+      "evidence": "This property is called inertia"
+    },
+    {
+      "id": "physics-force-calculation",
+      "question": "A 5 kg object accelerates at 3 m/s². Using Newton's Second Law, calculate the net force acting on it.",
+      "evidence": "net force acting on an object equals its mass multiplied by its acceleration"
+    },
+    {
+      "id": "physics-mass-comparison",
+      "question": "Two objects experience the same net force, but one has twice the mass of the other. Which object has the smaller acceleration?",
+      "evidence": "net force acting on an object equals its mass multiplied by its acceleration"
+    },
+    {
+      "id": "physics-action-reaction",
+      "question": "When a swimmer pushes water backward, why does the swimmer move forward?",
+      "evidence": "equal and opposite reaction force"
+    },
+    {
+      "id": "physics-friction-vs-inertia",
+      "question": "Which force opposes relative motion between two surfaces in contact?",
+      "evidence": "Friction is a force that opposes relative motion"
+    },
+    {
+      "id": "math-equation-reasoning",
+      "question": "A student obtains 2x = 6 after simplifying an equation. What operation should be performed next to isolate x, and what is the result?",
+      "evidence": "divide both sides by 2 to obtain x = 3"
+    },
+    {
+      "id": "math-distributive-application",
+      "question": "Expand the expression 3(x + 4) using the distributive property.",
+      "evidence": "a(b + c) = ab + ac"
+    },
+    {
+      "id": "math-like-terms",
+      "question": "Can 3x and 4x² be combined as like terms? Explain using the definition of like terms.",
+      "evidence": "same variables raised to the same powers"
+    },
+    {
+      "id": "network-dns-inference",
+      "question": "A user enters a website name, but the computer needs an IP address to communicate with the destination. Which service performs this translation?",
+      "evidence": "DNS, translates human-readable domain names into IP addresses"
+    },
+    {
+      "id": "network-router-switch",
+      "question": "A device needs to forward packets between two different networks. Should it use a router or a switch?",
+      "evidence": "A router forwards data packets between different networks"
+    },
+    {
+      "id": "network-bandwidth-latency",
+      "question": "A network can transfer a large amount of data but takes a long time to begin receiving a response. Which network property describes the delay?",
+      "evidence": "latency refers to the time taken for data to travel"
+    },
+    {
+      "id": "network-https-security",
+      "question": "Why is HTTPS considered more secure than ordinary HTTP according to the study notes?",
+      "evidence": "uses Transport Layer Security (TLS) to protect communication through encryption and authentication"
+    },
+    {
+      "id": "chemistry-atomic-number-inference",
+      "question": "If an atom contains 11 protons, what is its atomic number?",
+      "evidence": "atomic number of an element equals the number of protons"
+    },
+    {
+      "id": "chemistry-mass-calculation",
+      "question": "An atom contains 6 protons and 8 neutrons. What is its mass number?",
+      "evidence": "mass number equals the total number of protons and neutrons"
+    },
+    {
+      "id": "chemistry-ion-formation",
+      "question": "What happens to an atom when it gains or loses electrons?",
+      "evidence": "has gained or lost electrons and therefore has an electrical charge"
+    },
+    {
+      "id": "chemistry-periodic-table",
+      "question": "Why do elements in the same group of the periodic table often have similar chemical properties?",
+      "evidence": "similar outer electron configurations"
+    },
+    {
+      "id": "biology-cell-structure-combined",
+      "question": "A cell has a nucleus and mitochondria but lacks chloroplasts. Can you conclude that it is an animal cell? Explain why or why not using the study notes.",
+      "evidence": "In plant cells, chloroplasts contain chlorophyll and carry out photosynthesis"
+    },
+    {
+      "id": "physics-net-force",
+      "question": "An object has a mass of 8 kg and accelerates at 2 m/s². If its mass doubles while the net force stays constant, what will its new acceleration be?",
+      "evidence": "net force acting on an object equals its mass multiplied by its acceleration"
+    },
+    {
+      "id": "physics-force-pair",
+      "question": "A book rests on a table. According to Newton's Third Law, why should the action and reaction forces not be treated as forces that cancel each other on the book?",
+      "evidence": "Action and reaction forces act on different objects"
+    },
+    {
+      "id": "math-equivalent-equations",
+      "question": "A student subtracts 4 from only the left side of the equation 2x + 4 = 10. Why is this mathematically incorrect?",
+      "evidence": "perform the same operation on both sides"
+    },
+    {
+      "id": "network-bandwidth-vs-latency",
+      "question": "Two internet connections have the same bandwidth, but one takes longer for data to travel between devices. Which property differs, and why does bandwidth not describe this delay?",
+      "evidence": "Bandwidth refers to the maximum data transfer capacity"
+    },
+    {
+      "id": "chemistry-isotope-mass",
+      "question": "Two atoms have the same number of protons but different numbers of neutrons. Will they have the same atomic number and mass number? Explain.",
+      "evidence": "mass number equals the total number of protons and neutrons"
+    },
+    {
+      "id": "chemistry-ion-electron-transfer",
+      "question": "An electrically neutral atom loses two electrons. What happens to its electrical charge, and why?",
+      "evidence": "has gained or lost electrons and therefore has an electrical charge"
     }
+
+
   ]
 }

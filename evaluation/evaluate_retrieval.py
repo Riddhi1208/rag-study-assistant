@@ -8,8 +8,6 @@ from langchain_ollama import OllamaEmbeddings
 from evaluation.metrics import score_retrieval
 from ingest import split_documents
 from utils.retrieval import (
-    CHUNK_OVERLAP,
-    CHUNK_SIZE,
     EMBEDDING_MODEL,
     RETRIEVAL_FETCH_K,
     RETRIEVAL_K,
@@ -17,8 +15,10 @@ from utils.retrieval import (
 )
 
 EVALUATION_SET = Path(__file__).with_name("questions.json")
-BASELINE_CHUNK_SIZE = 500
-BASELINE_CHUNK_OVERLAP = 50
+CHUNK_COMPARISONS = (
+    ("19 chunks", 500, 50, 19),
+    ("35 chunks", 230, 50, 35),
+)
 
 
 def load_evaluation_set():
@@ -33,7 +33,7 @@ def run_variant(
     embeddings,
     chunk_size,
     chunk_overlap,
-    use_mmr,
+    expected_chunk_count,
 ):
     chunks = split_documents(
         documents,
@@ -42,27 +42,25 @@ def run_variant(
     )
     if not chunks:
         raise ValueError(f"{name} produced no chunks")
+    if len(chunks) != expected_chunk_count:
+        raise ValueError(
+            f"{name} expected {expected_chunk_count} chunks, got {len(chunks)}"
+        )
 
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
-        collection_name=f"rag_eval_{name}",
+        collection_name=f"rag_eval_{expected_chunk_count}",
     )
 
     ranked_results = []
     for case in questions:
-        if use_mmr:
-            results = vectorstore.max_marginal_relevance_search(
-                case["question"],
-                k=RETRIEVAL_K,
-                fetch_k=min(RETRIEVAL_FETCH_K, len(chunks)),
-                lambda_mult=RETRIEVAL_LAMBDA_MULT,
-            )
-        else:
-            results = vectorstore.similarity_search(
-                case["question"],
-                k=RETRIEVAL_K,
-            )
+        results = vectorstore.max_marginal_relevance_search(
+            case["question"],
+            k=RETRIEVAL_K,
+            fetch_k=min(RETRIEVAL_FETCH_K, len(chunks)),
+            lambda_mult=RETRIEVAL_LAMBDA_MULT,
+        )
         ranked_results.append([document.page_content for document in results])
 
     scores = score_retrieval(questions, ranked_results)
@@ -78,25 +76,10 @@ def main():
     questions = evaluation_set["questions"]
     embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL)
 
-    variants = [
-        (
-            "before",
-            BASELINE_CHUNK_SIZE,
-            BASELINE_CHUNK_OVERLAP,
-            False,
-        ),
-        (
-            "after",
-            CHUNK_SIZE,
-            CHUNK_OVERLAP,
-            True,
-        ),
-    ]
-
     print(f"Embedding model: {EMBEDDING_MODEL}")
     print(f"Questions: {len(questions)} (same top-{RETRIEVAL_K} budget)")
-    print(f"{'Variant':<10} {'Chunks':>6} {'Hit@1':>9} {'Hit@3':>9} {'MRR@3':>9}")
-    for name, chunk_size, chunk_overlap, use_mmr in variants:
+    print(f"{'Variant':<12} {'Chunks':>6} {'Hit@1':>9} {'Hit@3':>9} {'MRR@3':>9}")
+    for name, chunk_size, chunk_overlap, expected_chunk_count in CHUNK_COMPARISONS:
         chunk_count, scores = run_variant(
             name,
             documents,
@@ -104,10 +87,10 @@ def main():
             embeddings,
             chunk_size,
             chunk_overlap,
-            use_mmr,
+            expected_chunk_count,
         )
         print(
-            f"{name:<10} {chunk_count:>6} "
+            f"{name:<12} {chunk_count:>6} "
             f"{scores['hit_rate@1']:>8.1%} "
             f"{scores['hit_rate@3']:>8.1%} "
             f"{scores['mrr@3']:>8.1%}"

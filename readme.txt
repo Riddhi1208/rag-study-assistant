@@ -1,7 +1,9 @@
-# Local RAG Chatbot
+# RAG Study Assistant
 
-A local PDF question-answering app built with Streamlit, LangChain, ChromaDB,
-and Ollama. Documents, embeddings, and answers stay on your machine.
+A local study assistant built with Streamlit, LangChain, ChromaDB, and Ollama.
+Ask questions about your PDFs, get answers grounded in retrieved passages, and
+review the sources behind each response. Documents, embeddings, and answers stay
+on your machine.
 
 ## Setup and run
 
@@ -28,7 +30,7 @@ python ingest.py
 
 
 Ingestion replaces the active Chroma collection with the latest document
-chunks. Start the chat app with:
+chunks. Start the study assistant with:
 
 bash
 streamlit run app.py
@@ -42,17 +44,17 @@ bash
 python -m evaluation.evaluate_retrieval
 
 
-The pipeline loads eight questions with expected evidence phrases and a small,
+The pipeline loads 50 questions with expected evidence phrases and a small,
 synthetic document corpus from `evaluation/questions.json`. It splits and
 embeds the same documents twice, then retrieves the top three chunks per
 question:
 
-| Variant | Chunking | Ranking |
-|---|---|---|
-| Before | 500 characters, 50 overlap | Similarity |
-| After | Current settings in `utils/retrieval.py` | MMR |
+| Variant | Chunking | Chunks | Ranking |
+|---|---|---|---|
+| 19 chunks | 500 characters, 50 overlap | 19 | MMR |
+| 35 chunks | 230 characters, 50 overlap | 35 | MMR |
 
-It reports chunk count, **Hit@1**, **Hit@3**, and **MRR@3** for each variant.
+It reports **Hit@1**, **Hit@3**, and **MRR@3** for each variant.
 A hit means a retrieved chunk contains that question's expected evidence
 phrase; MRR rewards finding the evidence nearer the top. This measures retrieval
 only—not generated-answer accuracy or faithfulness. The benchmark uses local
